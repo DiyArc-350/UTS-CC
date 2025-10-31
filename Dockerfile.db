@@ -1,0 +1,12 @@
+FROM mongo:7.0
+
+# Create data directories
+RUN mkdir -p /data/db /data/configdb && \
+    chown -R mongodb:mongodb /data/db /data/configdb
+
+# Set permissions
+RUN chmod 755 /data/db /data/configdb
+
+EXPOSE 27017
+
+CMD ["mongod", "--bind_ip", "0.0.0.0"]

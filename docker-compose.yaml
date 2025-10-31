@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/
+      - FLASK_ENV=development
+    depends_on:
+      - mongodb
+    networks:
+      - crud-network
+    volumes:
+      - ./app.py:/app/app.py
+      - ./logs:/app/logs
+
+  mongodb:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=crud_db
+    networks:
+      - crud-network
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+
+networks:
+  crud-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  mongodb_config:

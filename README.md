@@ -36,14 +36,14 @@ This will:
 - Create a network bridge between them
 - Start both services
 
-The Flask app will be available at `http://localhost:5000`
+The Flask app will be available at `http://127.0.0.1:5000`
 
 ### 3. Verify It's Running
 
 Check the health endpoint:
 
 ```bash
-curl http://localhost:5000/health
+curl http://127.0.0.1:5000/health
 ```
 
 Expected response:
@@ -55,12 +55,12 @@ Expected response:
 
 ### Create Item
 ```bash
-curl -X POST http://localhost:5000/api/items \
+curl -X POST http://127.0.0.1:5000/api/items \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Coca Cola 500ml",
-    "price": 15000,
-    "quantity": 50,
+    "name": "aqua 500ml",
+    "price": 5000,
+    "quantity": 100,
     "category": "Beverages"
   }'
 ```
@@ -70,17 +70,17 @@ curl -X POST http://localhost:5000/api/items \
 
 ### Get All Items
 ```bash
-curl http://localhost:5000/api/items
+curl http://127.0.0.1:5000/api/items
 ```
 
 ### Get Single Item
 ```bash
-curl http://localhost:5000/api/items/<item_id>
+curl http://127.0.0.1:5000/api/items/6905f6674d3be8581b28d731
 ```
 
 ### Update Item
 ```bash
-curl -X PUT http://localhost:5000/api/items/<item_id> \
+curl -X PUT http://127.0.0.1:5000/api/items/6905f6674d3be8581b28d731 \
   -H "Content-Type: application/json" \
   -d '{
     "price": 16000,
@@ -92,7 +92,7 @@ Any field can be updated: `name`, `price`, `quantity`, `category`
 
 ### Delete Item
 ```bash
-curl -X DELETE http://localhost:5000/api/items/<item_id>
+curl -X DELETE http://127.0.0.1:5000/api/items/6905f6674d3be8581b28d731
 ```
 
 ## Data Schema

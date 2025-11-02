@@ -32,6 +32,18 @@ services:
       - mongodb_data:/data/db
       - mongodb_config:/data/configdb
 
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: http flask-app:5000
+    ports:
+      - "4040:4040"  # ngrok web interface
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    depends_on:
+      - flask-app
+    networks:
+      - crud-network
+
 networks:
   crud-network:
     driver: bridge
